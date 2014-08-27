@@ -1,0 +1,23 @@
+Backend:
+
+Development in Java
+
+General Sections:
+
+1. Catan Game
+I   - Game Controller
+II  - Players
+III - Game Objects
+IV  - Generation
+V   - Backend UI
+VI  - Frontend Intergration
+VII - Optimizations
+
+I   - Game Controller
+In charge of game flow and controlling when players move, what is valid, when to generate what
+
+
+2. User accounts
+
+3. AI
+
