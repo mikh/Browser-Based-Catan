@@ -1,5 +1,7 @@
 package game_objects;
 
-public class City {
+import java.util.ArrayList;
 
+public class City {
+	ArrayList<ResourceCard> cost = new ArrayList<ResourceCard>();
 }
