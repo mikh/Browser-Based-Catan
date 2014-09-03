@@ -1,5 +1,7 @@
 package game_controller;
 
-public class ResourceCache {
+import java.util.HashMap;
 
+public class ResourceCache {
+	HashMap<Integer, Integer> cache = new HashMap<Integer, Integer>();
 }
