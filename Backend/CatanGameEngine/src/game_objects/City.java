@@ -2,14 +2,13 @@ package game_objects;
 
 import game_controller.Defines;
 
-import java.util.ArrayList;
-
 import players.Player;
 
-public class City extends Buildable{
-	ArrayList<Tile> connecting_tiles = new ArrayList<Tile>();
+public class City extends GatheringStructure{
+	
 	
 	public City(Player owner){
+		this.amount_to_gather = 2;
 		this.owner = owner;
 		cost.add(new ResourceCard(Defines.WHEAT));
 		cost.add(new ResourceCard(Defines.WHEAT));

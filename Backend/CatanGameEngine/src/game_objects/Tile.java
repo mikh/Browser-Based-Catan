@@ -19,7 +19,7 @@ public class Tile {
 		ArrayList<ResourceCard> cards = new ArrayList<ResourceCard>();
 		if(roll != number || blocked)
 			return cards;
-		
+		cards = rc.get(type, amount_to_gather);
 		return cards;
 	}
 }
