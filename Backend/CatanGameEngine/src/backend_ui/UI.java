@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 public class UI {
 	JFrame main_frame;
 	public UI(){
+		//TODO: Need a method to overlap
 		main_frame = new JFrame("Browser Based Catan - Backend");
 		main_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main_frame.setSize(1200, 1200);
