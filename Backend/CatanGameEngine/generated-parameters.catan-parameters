@@ -1,0 +1,15 @@
+[INIT]
+number_of_players=4
+
+[PLAYER1]
+name=Crushinator 9000
+color=pink
+[PLAYER2]
+name=Bender
+color=gray
+[PLAYER3]
+name=Phillip J. Fry
+color=red
+[PLAYER4]
+name=The Professor
+color=blue

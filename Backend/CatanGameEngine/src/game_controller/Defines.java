@@ -1,11 +1,15 @@
 package game_controller;
 
+import java.awt.Color;
+
 public class Defines {
 	public static final int WHEAT = 0;
 	public static final int WOOD = 1;
 	public static final int ORE = 2;
 	public static final int SHEEP = 3;
 	public static final int BRICK = 4;
+	
+	public static String DEFAULTS_PATH = "generated-parameters.catan-parameters";
 	
 	public static int NUM_RESOURCES = 5;
 
@@ -28,4 +32,9 @@ public class Defines {
 	public static int NUM_MONOPOLY = 3;				//2
 	public static int NUM_VICTORY_POINT_CARDS = 3;  //3
 	public static int NUM_YEAR_OF_PLENTY = 3;		//4
+	
+	public static int NUM_PLAYERS = 0;
+	public static String[] PLAYER_NAMES = null;
+	public static Color[] PLAYER_COLORS = null;
+	
 }

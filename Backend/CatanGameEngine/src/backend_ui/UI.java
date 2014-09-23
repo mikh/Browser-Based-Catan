@@ -31,16 +31,16 @@ public class UI {
 		c.gridwidth = 2;
 		c.gridheight = 1;
 		
+		
+		
 		main_frame.add(new gui_tile(188, "wheat_tile_PS.png"), c);
 		c.gridx = 2;
 		main_frame.add(new gui_tile(188, "clay_tile_PS.png"), c);
-		c.gridy = 2;
+		c.gridy = 1;
 		c.gridx = 0;
 		c.gridwidth = 1;
-		c.gridheight = 1;
 		main_frame.add(new blank_tile(94), c);
 		c.gridwidth = 2;
-		c.gridheight = 1;
 		c.gridx = 1;
 		main_frame.add(new gui_tile(188, "water_tile_PS.png"), c);
 		
