@@ -8,6 +8,7 @@ import players.Player;
 
 public abstract class Buildable {
 	protected ArrayList<ResourceCard> cost = new ArrayList<ResourceCard>();
+	protected ArrayList<Tile> connecting_tiles = new ArrayList<Tile>();
 	public Player owner;
 	
 	public boolean canPay(Player p){

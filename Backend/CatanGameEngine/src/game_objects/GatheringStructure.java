@@ -3,7 +3,7 @@ package game_objects;
 import java.util.ArrayList;
 
 public abstract class GatheringStructure extends Buildable{
-	protected ArrayList<Tile> connecting_tiles = new ArrayList<Tile>();
+	
 	
 	protected int amount_to_gather = 1;
 	
