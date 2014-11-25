@@ -1,16 +1,20 @@
 package backend_ui;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 public class UI {
@@ -19,34 +23,66 @@ public class UI {
 		//TODO: Need a method to overlap
 		main_frame = new JFrame("Browser Based Catan - Backend");
 		main_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		main_frame.setSize(1200, 1200);
-		main_frame.setLayout(new GridBagLayout());
+		main_frame.setSize(1200, 300);
+		//main_frame.setLayout(new GridBagLayout());
 		main_frame.setLocationRelativeTo(null);
 		
-		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.HORIZONTAL;
+		JLayeredPane jlp = new JLayeredPane();
+		jlp.setPreferredSize(new Dimension(1200,300));
+		jlp.setMinimumSize(new Dimension(1200,300));
+		jlp.setSize(new Dimension(1200, 300));
+		jlp.setLayout(null);
+		//jlp.setLayout(new GridBagLayout());
+
+		JPanel row1 = new JPanel(), row2 = new JPanel();
+		row1.setLayout(new GridBagLayout());
+		row1.setPreferredSize(new Dimension(800, 200));
+		row1.setMinimumSize(new Dimension(800, 200));
+		row1.setBackground(Color.blue);
+		row1.setLocation(new Point(1,1));
+		row2.setLayout(new GridBagLayout());
+		row2.setPreferredSize(new Dimension(800, 200));
+		row2.setMinimumSize(new Dimension(800, 200));
+		row2.setBackground(Color.green);
 		
-		c.gridy = 0;
-		c.gridx = 0;
-		c.gridwidth = 2;
-		c.gridheight = 1;
+		GridBagConstraints c1 = new GridBagConstraints(), c2 = new GridBagConstraints();
+		c1.fill = GridBagConstraints.HORIZONTAL;
+		c2.fill = GridBagConstraints.HORIZONTAL;
+		
+		c1.gridy = 0;
+		c1.gridx = 0;
+		c1.gridwidth = 2;
+		c1.gridheight = 1;
 		
 		
 		
-		main_frame.add(new gui_tile(188, "wheat_tile_PS.png"), c);
-		c.gridx = 2;
-		main_frame.add(new gui_tile(188, "clay_tile_PS.png"), c);
-		c.gridy = 1;
-		c.gridx = 0;
-		c.gridwidth = 1;
-		main_frame.add(new blank_tile(94), c);
-		c.gridwidth = 2;
-		c.gridx = 1;
-		main_frame.add(new gui_tile(188, "water_tile_PS.png"), c);
 		
+		row1.add(new gui_tile(188, "wheat_tile_PS.png"),c1);
+		c1.gridx = 2;
+		row1.add(new gui_tile(188, "clay_tile_PS.png"),c1);
+		
+	
+		c2.gridy = 0;
+		c2.gridx = 0;
+		c2.gridwidth = 3;
+		row2.add(new blank_tile(100), c2);
+		
+		c2.gridy = 1;
+		c2.gridwidth = 1;
+		row2.add(new blank_tile(94),c2);
+		c2.gridwidth = 2;
+		c2.gridx = 1;
+		row2.add(new gui_tile(188, "water_tile_PS.png"),c2);
+		
+		jlp.add(row1, new Integer(0));
+		jlp.add(row2, new Integer(1));
+		
+		main_frame.add(jlp);
 		main_frame.setVisible(true);
 	}
 }
+
+
 
 class gui_tile extends JPanel{
 	//there are a max of 5 tiles across at a time
@@ -68,6 +104,7 @@ class gui_tile extends JPanel{
 		/**Panel Setup**/
 		setSize(sqsi, sqsi);
 		setBounds(0, 0, sqsi, sqsi);
+		this.setBackground(new Color(0,0,0,0));
 	}
 	
 	/***Draw Overrides***/
@@ -94,6 +131,7 @@ class blank_tile extends JPanel{
 	private int sqsi;
 	public blank_tile(int square_size){
 		sqsi = square_size;
+		this.setBackground(new Color(0,0,0,0));
 	}
 	
 	/***Dimensional Overrides***/
