@@ -229,6 +229,10 @@ class gui_tile extends JPanel implements MouseListener, MouseMotionListener{
 				e.printStackTrace();
 			}
 		}
+		else{
+			//resend MouseEvent
+		
+		}
 		
 	}
 
@@ -291,6 +295,7 @@ class gui_tile extends JPanel implements MouseListener, MouseMotionListener{
 				this.repaint();
 				this.revalidate();
 			}		
+			//resendMouseEvent
 		}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
