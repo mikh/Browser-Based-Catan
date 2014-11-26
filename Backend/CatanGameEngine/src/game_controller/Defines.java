@@ -37,4 +37,16 @@ public class Defines {
 	public static String[] PLAYER_NAMES = null;
 	public static Color[] PLAYER_COLORS = null;
 	
+	
+	/***** GUI VARIABLES *****/
+	public static final String WHEAT_TILE = "wheat_tile_200pxy.png";
+	public static final String SHEEP_TILE = "sheep_tile_200pxy.png";
+	public static final String ORE_TILE = "ore_tile_200pxy.png";
+	public static final String CLAY_TILE = "clay_tile_200pxy.png";
+	public static final String WOOD_TILE = "wood_tile_200pxy.png";
+	public static final String DESERT_TILE = "desert_tile_200pxy.png";
+	public static final String WATER_TILE = "water_tile_200pxy.png";
+	public static final int BASE_TILE_HEIGHT = 200;
+	
+	
 }

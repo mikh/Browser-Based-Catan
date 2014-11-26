@@ -1,5 +1,7 @@
 package backend_ui;
 
+import game_controller.Defines;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -42,14 +44,14 @@ public class UI {
 		row1.setMinimumSize(new Dimension(800, 300));
 		row1.setOpaque(false);
 		row1.setBackground(new Color(0,0,0,0));
-		row1.setLocation(new Point(1,1));
+		//row1.setLocation(new Point(1,1));
 		row1.setBounds(0,0,800, 300);
 		row2.setLayout(new GridBagLayout());
 		row2.setPreferredSize(new Dimension(800, 300));
 		row2.setMinimumSize(new Dimension(800, 300));
 		row2.setOpaque(false);
 		row2.setBackground(new Color(0,0,0,0));
-		row2.setBounds(0,100,800,300);
+		row2.setBounds(200,200,800,300);
 		
 		GridBagConstraints c1 = new GridBagConstraints(), c2 = new GridBagConstraints();
 		c1.fill = GridBagConstraints.HORIZONTAL;
@@ -63,22 +65,23 @@ public class UI {
 		
 		
 		
-		row1.add(new gui_tile(188, "wheat_tile_PS.png"),c1);
+		row1.add(new gui_tile(Defines.BASE_TILE_HEIGHT, Defines.WHEAT_TILE),c1);
 		c1.gridx = 2;
-		row1.add(new gui_tile(188, "clay_tile_PS.png"),c1);
+		row1.add(new gui_tile(Defines.BASE_TILE_HEIGHT, Defines.CLAY_TILE),c1);
 		
 	
 		c2.gridy = 0;
 		c2.gridx = 0;
-		c2.gridwidth = 3;
-		row2.add(new blank_tile(85), c2);
+		//c2.gridwidth = 3;
+		//row2.add(new blank_tile(85), c2);
 		
-		c2.gridy = 1;
+		//c2.gridy = 1;
 		c2.gridwidth = 1;
-		row2.add(new blank_tile(1),c2);
-		c2.gridwidth = 2;
-		c2.gridx = 1;
-		row2.add(new gui_tile(188, "water_tile_PS.png"),c2);
+		c2.gridheight = 1;
+		//row2.add(new blank_tile(1),c2);
+		//c2.gridwidth = 2;
+		//c2.gridx = 1;
+		row2.add(new gui_tile(Defines.BASE_TILE_HEIGHT, Defines.WATER_TILE),c2);
 		
 		jlp.add(row1, new Integer(0));
 		jlp.add(row2, new Integer(1));
@@ -96,13 +99,16 @@ class gui_tile extends JPanel implements MouseListener{
 	//there are a max of 5 tiles across at a time
 	//but they are differently spaced
 	
-	private int sqsi;
+	private int x_f, y_f;
 	private BufferedImage img;
 	
+	private Point P1, P2, P3, P4, P5, P6;	//starting from middle top point got clockwise
 	
 	
-	public gui_tile(int square_size, String tileImageName){
-		sqsi = square_size;
+	
+	public gui_tile(int height, String tileImageName){
+		y_f = height;
+		x_f = (int)((height*1.0) * 1.73205/2);
 		try{
 			img = ImageIO.read(new File(tileImageName));
 		} catch(IOException e){
@@ -110,13 +116,37 @@ class gui_tile extends JPanel implements MouseListener{
 			//TODO crap error
 		}
 		/**Panel Setup**/
-		setSize(sqsi, sqsi);
-		setBounds(0, 0, sqsi, sqsi);
+		setSize(x_f, y_f);
+		setBounds(0, 0, x_f, y_f);
 		//this.setBackground(new Color(0,0,0,0));
 		this.setOpaque(false);
 		this.setBackground(new Color(0,0,0,0));
 		//this.set
 		this.addMouseListener(this);
+	}
+	
+	private void calculatePoints(){
+		P1 = new Point((int)(Math.sqrt(3.0)/4.0)*y_f, 0);
+		P2 = new Point((int)(Math.sqrt(3.0)/2.0*y_f),-1*(int)(1.0/4.0*y_f));
+		P3 = new Point((int)(Math.sqrt(3.0)/2.0*y_f),-1*(int)(3.0/4.0*y_f));
+		P4 = new Point((int)(Math.sqrt(3.0)/4.0)*y_f, -1*y_f);
+		P5 = new Point(0,-1*(int)(3.0/4.0*y_f));
+		P6 = new Point(0,-1*(int)(1.0/4.0*y_f));		
+	}
+	
+	private int getAngle(Point dest, Point start){
+		double y = dest.y - start.y;
+		double x = dest.x - start.x;
+		if((y==0) && (x==0))
+			return 361;
+		if(y==0){
+			
+		}
+	}
+	
+	private boolean isPointInHexagon(Point p){
+		
+		return true;
 	}
 	
 	/***Draw Overrides***/
@@ -133,11 +163,11 @@ class gui_tile extends JPanel implements MouseListener{
 	/***Dimensional Overrides***/
 	@Override
 	public Dimension getMinimumSize(){
-		return new Dimension(sqsi, sqsi);
+		return new Dimension(x_f, y_f);
 	}
 	@Override 
 	public Dimension getPreferredSize(){
-		return new Dimension(sqsi, sqsi);
+		return new Dimension(x_f, y_f);
 	}
 
 	@Override
@@ -149,7 +179,7 @@ class gui_tile extends JPanel implements MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		try {
-			img = ImageIO.read(new File("wood_tile_PS.png"));
+			img = ImageIO.read(new File(Defines.WOOD_TILE));
 			this.repaint();
 			this.revalidate();
 			//this.setBackground(new Color(0,0,0,0));
@@ -165,7 +195,7 @@ class gui_tile extends JPanel implements MouseListener{
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		try {
-			img = ImageIO.read(new File("water_tile_PS.png"));
+			img = ImageIO.read(new File(Defines.WATER_TILE));
 			this.repaint();
 			this.revalidate();
 			//this.setBackground(new Color(0,0,0,0));
