@@ -11,6 +11,8 @@ public class Defines {
 	public static final int ORE = 2;
 	public static final int SHEEP = 3;
 	public static final int BRICK = 4;
+	public static final int DESERT = 5;
+	public static final int WATER = 6;
 	
 	public static String DEFAULTS_PATH = "generated-parameters.catan-parameters";
 	
@@ -42,13 +44,15 @@ public class Defines {
 	
 	
 	/***** GUI VARIABLES *****/
+	public static final String DEFAULT_TILE = "default_tile_200pxy.png";
 	public static final String WHEAT_TILE = "wheat_tile_200pxy.png";
 	public static final String SHEEP_TILE = "sheep_tile_200pxy.png";
 	public static final String ORE_TILE = "ore_tile_200pxy.png";
-	public static final String CLAY_TILE = "clay_tile_200pxy.png";
+	public static final String BRICK_TILE = "clay_tile_200pxy.png";
 	public static final String WOOD_TILE = "wood_tile_200pxy.png";
 	public static final String DESERT_TILE = "desert_tile_200pxy.png";
 	public static final String WATER_TILE = "water_tile_200pxy.png";
+	public static final Color TILE_BACKGROUND_COLOR = new Color(0,0,0,0);
 	public static final int BASE_TILE_HEIGHT = 200;
 	public static final String JFRAME_NAME = "Browser Based Catan - Backend";
 	public static final Dimension JFRAME_INITIAL_SIZE = new Dimension(1200,1000);

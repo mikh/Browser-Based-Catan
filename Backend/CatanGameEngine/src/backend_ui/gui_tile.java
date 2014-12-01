@@ -18,13 +18,55 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class gui_tile extends JPanel implements MouseListener, MouseMotionListener{
-
 	
-	//TODO:among many other things, don't forget to add a filter that will allow resizing the images
+	/**** Class Global Variables ****/
+	private Tile tile = null;
+	private TileRow parentRow = null;
+	private Dimension size = null;
+	private String base_image_name = Defines.DEFAULT_TILE;
+	private Point P1, P2, P3, P4, P5, P6;	//starting from middle top point got clockwise
+	
+	
+	/**** Class Construction ****/
+	
 	public gui_tile(Tile tile, int height, TileRow parentRow){
+		this.tile = tile;
+		this.parentRow = parentRow;
+		size = new Dimension((int)((height*1.0)*Math.sqrt(3)/2), height);
+		this.base_image_name = getTileImageName(tile.getType());
+		this.setSize(size);
+		this.setBounds(0,0,size.width,size.height);
+		this.setBackground(Defines.TILE_BACKGROUND_COLOR);
+		calculatePoints();
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
 		
 	}
 	
+	
+	/***Draw Overrides***/
+	 @Override
+	 public void paintComponent(Graphics g){
+		 try{
+			 super.paintComponent(g);
+			//TODO:add a filter that will allow resizing the images
+			 g.drawImage(ImageIO.read(new File(this.base_image_name)),0, 0, null);
+	 
+		 } catch(IOException e){
+			 System.out.println("There was an error reading the image!");
+			 if(this.base_image_name.equals(Defines.DEFAULT_TILE))
+				 System.exit(-1);
+			 else{
+				 this.base_image_name = Defines.DEFAULT_TILE;
+				 //TODO: Why do you have to repaint and revalidate?
+				 this.repaint();
+				 this.revalidate();
+			 }
+				 
+		 }
+	 }
+	
+	/**** Mouse Events ****/
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		// TODO Auto-generated method stub
@@ -66,16 +108,97 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 		// TODO Auto-generated method stub
 		
 	}
+
+	/***Dimensional Overrides***/
+	@Override
+	public Dimension getMinimumSize(){
+		return size;
+	}
+	@Override 
+	public Dimension getPreferredSize(){
+		return size;
+	}
 	
+	/**** Tile Backend Calculations ****/
+	private String getTileImageName(int type){
+		switch(type){
+			case Defines.WHEAT:
+				return Defines.WHEAT_TILE;
+			case Defines.WOOD:
+				return Defines.WOOD_TILE;
+			case Defines.ORE:
+				return Defines.ORE_TILE;
+			case Defines.SHEEP:
+				return Defines.SHEEP_TILE;
+			case Defines.BRICK:
+				return Defines.BRICK_TILE;
+			case Defines.DESERT:
+				return Defines.DESERT_TILE;
+			case Defines.WATER:
+				return Defines.WATER_TILE;
+			default:
+				return Defines.DEFAULT_TILE;				
+		}
+	}
 	
+
+	private void calculatePoints(){
+		P1 = new Point((int)(Math.sqrt(3.0)/4.0*size.height), 0);
+		P2 = new Point((int)(Math.sqrt(3.0)/2.0*size.height),-1*(int)(1.0/4.0*size.height));
+		P3 = new Point((int)(Math.sqrt(3.0)/2.0*size.height),-1*(int)(3.0/4.0*size.height));
+		P4 = new Point((int)(Math.sqrt(3.0)/4.0*size.height), -1*size.height);
+		P5 = new Point(0,-1*(int)(3.0/4.0*size.height));
+		P6 = new Point(0,-1*(int)(1.0/4.0*size.height));		
+	}
 	
+	private int getAngle(Point dest, Point start){
+		double y = dest.y - start.y;
+		double x = dest.x - start.x;
+		if((y==0) && (x==0))
+			return 361;
+		if(x==0){
+			if(y > 0)
+				return 90;
+			else
+				return -90;
+		}
+		if(y == 0){
+			if(x > 0)
+				return 0;
+			else
+				return 180;
+		}
+		double m = y/x;
+		m = Math.atan(m);
+		int result = (int)(m*360/(2*Math.PI));
+		if(result == 0 && x < 0)
+			return 180;
+		return result;
+	}
 	
+	private boolean isPointInHexagon(Point p){
+		p.y = -1*p.y;
+		int angle = getAngle(p, P6);
+		if(angle > 30)
+			return false;
+		angle = getAngle(p, P1);
+		if(angle > -30 && angle <=0)
+			return false;
+		angle = getAngle(p, P4);
+		if(angle < 30 && angle >= 0)
+			return false;
+		angle = getAngle(p, P5);
+		if(angle < -30 & angle >=-90)
+			return false;
+		
+		return true;
+	}
 	
 	
 	//there are a max of 5 tiles across at a time
 	//but they are differently spaced
 	
-//	private int x_f, y_f;
+//	private int x_f, size.height;
 //	private BufferedImage img;
 //	private String currentImage;
 //	
@@ -84,7 +207,7 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 //	
 //	
 //	public gui_tile(int height, String tileImageName){
-//		y_f = height;
+//		size.height = height;
 //		x_f = (int)((height*1.0) * 1.73205/2);
 //		currentImage = tileImageName;
 //		try{
@@ -94,8 +217,8 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 //			//TODO crap error
 //		}
 //		/**Panel Setup**/
-//		setSize(x_f, y_f);
-//		setBounds(0, 0, x_f, y_f);
+//		setSize(x_f, size.height);
+//		setBounds(0, 0, x_f, size.height);
 //		//this.setBackground(new Color(0,0,0,0));
 //		this.setOpaque(false);
 //		this.setBackground(new Color(0,0,0,0));
@@ -106,12 +229,12 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 //	}
 //	
 //	private void calculatePoints(){
-//		P1 = new Point((int)(Math.sqrt(3.0)/4.0*y_f), 0);
-//		P2 = new Point((int)(Math.sqrt(3.0)/2.0*y_f),-1*(int)(1.0/4.0*y_f));
-//		P3 = new Point((int)(Math.sqrt(3.0)/2.0*y_f),-1*(int)(3.0/4.0*y_f));
-//		P4 = new Point((int)(Math.sqrt(3.0)/4.0*y_f), -1*y_f);
-//		P5 = new Point(0,-1*(int)(3.0/4.0*y_f));
-//		P6 = new Point(0,-1*(int)(1.0/4.0*y_f));		
+//		P1 = new Point((int)(Math.sqrt(3.0)/4.0*size.height), 0);
+//		P2 = new Point((int)(Math.sqrt(3.0)/2.0*size.height),-1*(int)(1.0/4.0*size.height));
+//		P3 = new Point((int)(Math.sqrt(3.0)/2.0*size.height),-1*(int)(3.0/4.0*size.height));
+//		P4 = new Point((int)(Math.sqrt(3.0)/4.0*size.height), -1*size.height);
+//		P5 = new Point(0,-1*(int)(3.0/4.0*size.height));
+//		P6 = new Point(0,-1*(int)(1.0/4.0*size.height));		
 //	}
 //	
 //	private int getAngle(Point dest, Point start){
@@ -175,11 +298,11 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 //	/***Dimensional Overrides***/
 //	@Override
 //	public Dimension getMinimumSize(){
-//		return new Dimension(x_f, y_f);
+//		return new Dimension(x_f, size.height);
 //	}
 //	@Override 
 //	public Dimension getPreferredSize(){
-//		return new Dimension(x_f, y_f);
+//		return new Dimension(x_f, size.height);
 //	}
 //
 //	@Override

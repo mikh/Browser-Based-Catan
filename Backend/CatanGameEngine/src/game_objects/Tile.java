@@ -22,5 +22,9 @@ public class Tile {
 		cards = rc.get(type, amount_to_gather);
 		return cards;
 	}
+	
+	public int getType(){
+		return type;
+	}
 }
 
