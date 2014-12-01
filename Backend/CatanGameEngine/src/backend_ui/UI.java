@@ -25,9 +25,44 @@ import javax.swing.JPanel;
 public class UI{
 	JFrame main_frame;
 	public UI(){
+		/****  JFrame main_frame setup ****/
 		main_frame = new JFrame(Defines.JFRAME_NAME);
 		main_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main_frame.setSize(Defines.JFRAME_INITIAL_SIZE);
+		main_frame.setLocationRelativeTo(Defines.JFRAME_RELATIVE_COMPONENT_POSITION);
+		main_frame.setLayout(new GridBagLayout());
+		
+		/**** main_frame components ****/
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		
+		//main frame components will include the board, the statistics panel, and the player panel
+		//these can probably be arranged using the gridbaglayout since no overlap is required
+		
+		//TODO:Define Dimensions
+		//board
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridheight = 8;
+		c.gridwidth = 9;
+		main_frame.add(new FillerBox(new Dimension(900,800), Color.blue),c);	//TODO:Fill in board
+		
+		//statistics
+		c.gridx = 9;
+		c.gridy = 0;
+		c.gridheight = 10;
+		c.gridwidth = 3;
+		main_frame.add(new FillerBox(new Dimension(300, 1000), Color.green), c);	//TODO:Fill in statistics
+		
+		//player panel
+		c.gridx = 0;
+		c.gridy = 8;
+		c.gridheight = 2;
+		c.gridwidth = 9;
+		main_frame.add(new FillerBox(new Dimension(900, 200), Color.magenta), c);	//TODO:Fill in player options
+		
+		/**** Display GUI ****/
+		main_frame.setVisible(true);
 	}
 }
 
@@ -35,13 +70,6 @@ public class UI{
 public class UI {
 	JFrame main_frame;
 	public UI(){
-		//TODO: Need a method to overlap
-		main_frame = new JFrame("Browser Based Catan - Backend");
-		main_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		main_frame.setSize(1200, 1200);
-		//main_frame.setLayout(new GridBagLayout());
-		main_frame.setLocationRelativeTo(null);
-		
 		JLayeredPane jlp = new JLayeredPane();
 		jlp.setPreferredSize(new Dimension(1200,1200));
 		jlp.setMinimumSize(new Dimension(1200,1200));
@@ -127,7 +155,7 @@ class gui_tile extends JPanel implements MouseListener, MouseMotionListener{
 			img = ImageIO.read(new File(tileImageName));
 		} catch(IOException e){
 			e.printStackTrace();
-			//TODO crap error
+			//TODO crap error - Deprecated
 		}*/
 		/**Panel Setup**//*
 		setSize(x_f, y_f);
@@ -220,7 +248,7 @@ class gui_tile extends JPanel implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub - Deprecated
 		
 	}
 
@@ -236,7 +264,7 @@ class gui_tile extends JPanel implements MouseListener, MouseMotionListener{
 				//this.setBackground(new Color(0,0,0,0));
 				//this.setOpaque(false);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				// TODO Auto-generated catch block - Deprecated
 				e.printStackTrace();
 			}
 		}
@@ -249,7 +277,7 @@ class gui_tile extends JPanel implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub - Deprecated
 		//Point press = new Point(arg0.getX(), arg0.getY());
 		//if(isPointInHexagon(press)){
 			try {
@@ -260,7 +288,7 @@ class gui_tile extends JPanel implements MouseListener, MouseMotionListener{
 				//this.setBackground(new Color(0,0,0,0));
 				//this.setOpaque(false);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				// TODO Auto-generated catch block - Deprecated
 				e.printStackTrace();
 			}
 		
@@ -268,20 +296,20 @@ class gui_tile extends JPanel implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub - Deprecated
 		Point press = new Point(arg0.getX(), arg0.getY());
 		isPointInHexagon(press);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub - Deprecated
 		
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub - Deprecated
 		
 	}
 
@@ -309,7 +337,7 @@ class gui_tile extends JPanel implements MouseListener, MouseMotionListener{
 			//resendMouseEvent
 		}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block - Deprecated
 			e.printStackTrace();
 		}
 		

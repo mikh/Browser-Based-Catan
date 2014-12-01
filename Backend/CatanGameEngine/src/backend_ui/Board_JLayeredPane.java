@@ -5,13 +5,12 @@ import java.awt.Dimension;
 import javax.swing.JLayeredPane;
 
 public class Board_JLayeredPane extends JLayeredPane{
-	
-	
-	public Board_JLayeredPane(int size_x, int size_y){
+		
+	public Board_JLayeredPane(Dimension size){
 		super();
-		this.setPreferredSize(new Dimension(size_x, size_y));
-		this.setMinimumSize(new Dimension(size_x, size_y));
-		this.setSize(new Dimension(size_x, size_y));
+		this.setPreferredSize(size);
+		this.setMinimumSize(size);
+		this.setSize(size);
 		this.setLayout(null);
 		
 		populate();
