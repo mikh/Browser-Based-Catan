@@ -1,6 +1,7 @@
 package game_controller;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 public class Defines {
 	public static final int WHEAT = 0;
@@ -47,6 +48,8 @@ public class Defines {
 	public static final String DESERT_TILE = "desert_tile_200pxy.png";
 	public static final String WATER_TILE = "water_tile_200pxy.png";
 	public static final int BASE_TILE_HEIGHT = 200;
+	public static final String JFRAME_NAME = "Browser Based Catan - Backend";
+	public static final Dimension JFRAME_INITIAL_SIZE = new Dimension(1200,1200);
 	
 	
 }
