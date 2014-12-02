@@ -34,10 +34,11 @@ public class TileRow extends JPanel{
 		c.gridy = 0;
 		c.gridheight = 1;
 		c.gridwidth = 1;
+		int ID = 0;
 		
 		for(Tile tile:tiles){
 			c.gridx = grid_x;
-			this.add(new gui_tile(tile, height, this), c);
+			this.add(new gui_tile(tile, height, this, ID++), c);
 			grid_x++;
 		}
 	}

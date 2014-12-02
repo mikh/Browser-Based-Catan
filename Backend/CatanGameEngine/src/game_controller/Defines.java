@@ -52,6 +52,14 @@ public class Defines {
 	public static final String WOOD_TILE = "wood_tile_200pxy.png";
 	public static final String DESERT_TILE = "desert_tile_200pxy.png";
 	public static final String WATER_TILE = "water_tile_200pxy.png";
+	public static final String ACTIVE_TILE = "clicked_tile_200pxy.png";
+	public static final String WHEAT_TILE_LIGHT = "wheat_light_tile_200pxy.png";
+	public static final String SHEEP_TILE_LIGHT = "sheep_light_tile_200pxy.png";
+	public static final String ORE_TILE_LIGHT = "ore_light_tile_200pxy.png";
+	public static final String BRICK_TILE_LIGHT = "clay_light_tile_200pxy.png";
+	public static final String WOOD_TILE_LIGHT = "wood_light_tile_200pxy.png";
+	public static final String DESERT_TILE_LIGHT = "desert_light_tile_200pxy.png";
+	public static final String WATER_TILE_LIGHT = "water_light_tile_200pxy.png";
 	public static final Color TILE_BACKGROUND_COLOR = new Color(0,0,0,0);
 	public static final int BASE_TILE_HEIGHT = 200;
 	public static final String JFRAME_NAME = "Browser Based Catan - Backend";
