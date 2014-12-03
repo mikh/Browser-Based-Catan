@@ -62,8 +62,19 @@ public class Defines {
 	public static final String WATER_TILE_LIGHT = "water_light_tile_200pxy.png";
 	public static final Color TILE_BACKGROUND_COLOR = new Color(0,0,0,0);
 	public static final int BASE_TILE_HEIGHT = 200;
+	
 	public static final String JFRAME_NAME = "Browser Based Catan - Backend";
 	public static final Dimension JFRAME_INITIAL_SIZE = new Dimension(1200,1000);
 	public static final JComponent JFRAME_RELATIVE_COMPONENT_POSITION = null;
+	
+	public static final Color BOARD_BACKGROUND_COLOR = new Color(0,0,0,0);
+	
+	public static final int MOUSE_DRAGGED_EVENT = 0;
+	public static final int MOUSE_MOVED_EVENT = 1;
+	public static final int MOUSE_CLICKED_EVENT = 2;
+	public static final int MOUSE_ENTERED_EVENT = 3;
+	public static final int MOUSE_EXITED_EVENT = 4;
+	public static final int MOUSE_PRESSED_EVENT = 5;
+	public static final int MOUSE_RELEASED_EVENT = 6;
 	
 }

@@ -17,8 +17,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class gui_tile extends JPanel implements MouseListener, MouseMotionListener{
-	
+
 	/**** Class Global Variables ****/
 	private int ID = 0;
 	private Tile tile = null;
@@ -26,7 +27,7 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 	private Dimension size = null;
 	private String base_image_name = Defines.DEFAULT_TILE, light_image_name = Defines.DEFAULT_TILE, active_image_name = Defines.DEFAULT_TILE, current_image = Defines.DEFAULT_TILE;
 	private Point P1, P2, P3, P4, P5, P6;	//starting from middle top point got clockwise
-	
+	private boolean event_activated = false;
 	
 	/**** Class Construction ****/
 	
@@ -92,6 +93,10 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 				this.revalidate();
 			}
 		}
+		if(!event_activated)
+			parentRow.propogate_mouse_event(mouse_position, this, Defines.MOUSE_MOVED_EVENT, arg0);
+		else
+			event_activated = false;
 		
 	}
 
@@ -105,6 +110,10 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 				this.revalidate();
 			}
 		} else{
+			if(!event_activated)
+				parentRow.propogate_mouse_event(mouse_position, this, Defines.MOUSE_CLICKED_EVENT, arg0);
+			else 
+				event_activated = false;
 			if(!(this.current_image.equals(this.base_image_name))){
 				this.current_image = this.base_image_name;
 				this.repaint();
@@ -124,6 +133,10 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 				this.revalidate();
 			}
 		} else{
+			if(!event_activated)
+				parentRow.propogate_mouse_event(mouse_position, this, Defines.MOUSE_ENTERED_EVENT, arg0);
+			else
+				event_activated = false;
 			if(!(this.current_image.equals(this.base_image_name))){
 				this.current_image = this.base_image_name;
 				this.repaint();
@@ -135,20 +148,10 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		Point mouse_position = new Point(arg0.getX(), arg0.getY());
-		if(isPointInHexagon(mouse_position)){ 
-			if(!(this.current_image.equals(this.light_image_name))){
-				this.current_image = this.light_image_name;
-				this.repaint();
-				this.revalidate();
-			}
-		} else{
-			if(!(this.current_image.equals(this.base_image_name))){
-				this.current_image = this.base_image_name;
-				this.repaint();
-				this.revalidate();
-			}
-		}		
+		if(!(this.current_image.equals(this.base_image_name))){				this.current_image = this.base_image_name;
+			this.repaint();
+			this.revalidate();
+		}
 	}
 
 	@Override
@@ -163,6 +166,38 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 		
 	}
 
+	public void activate_mouse_event(Point m, MouseEvent me, int mouse_event_type){
+		m.x -= this.getLocation().x;
+		m.y -= this.getLocation().y;
+		this.event_activated = true;
+		MouseEvent ev = new MouseEvent(this, me.getID(), me.getWhen(), me.getModifiers(), m.x, m.y, me.getClickCount(), false);
+		switch(mouse_event_type){
+			case Defines.MOUSE_CLICKED_EVENT:
+				this.mouseClicked(ev);
+				break;
+			case Defines.MOUSE_DRAGGED_EVENT:
+				this.mouseDragged(ev);
+				break;
+			case Defines.MOUSE_ENTERED_EVENT:
+				this.mouseEntered(ev);
+				break;
+			case Defines.MOUSE_EXITED_EVENT:
+				this.mouseExited(ev);
+				break;
+			case Defines.MOUSE_MOVED_EVENT:
+				this.mouseMoved(ev);
+				break;
+			case Defines.MOUSE_PRESSED_EVENT:
+				this.mousePressed(ev);
+				break;
+			case Defines.MOUSE_RELEASED_EVENT:
+				this.mouseReleased(ev);
+				break;
+			default:
+				System.out.println("Invalid mouse Event");
+		}
+	}
+	
 	/***Dimensional Overrides***/
 	@Override
 	public Dimension getMinimumSize(){
@@ -255,7 +290,8 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 		return result;
 	}
 	
-	private boolean isPointInHexagon(Point p){
+	private boolean isPointInHexagon(Point n_p){
+		Point p = new Point(n_p.x, n_p.y);
 		p.y = -1*p.y;
 		int angle = getAngle(p, P6);
 		if(angle > 30)
