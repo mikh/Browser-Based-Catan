@@ -4,6 +4,7 @@ import game_controller.Board;
 import game_controller.Defines;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -11,6 +12,8 @@ import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Point;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -28,7 +31,7 @@ import javax.swing.JPanel;
 //TODO: tile display 
 
 public class UI{
-	JFrame main_frame;
+	public JFrame main_frame;
 	public UI(Board board){
 		/****  JFrame main_frame setup ****/
 		main_frame = new JFrame(Defines.JFRAME_NAME);
@@ -36,6 +39,7 @@ public class UI{
 		main_frame.setSize(Defines.JFRAME_INITIAL_SIZE);
 		main_frame.setLocationRelativeTo(Defines.JFRAME_RELATIVE_COMPONENT_POSITION);
 		main_frame.setLayout(new GridBagLayout());
+
 		
 		/**** main_frame components ****/
 		GridBagConstraints c = new GridBagConstraints();
@@ -54,7 +58,8 @@ public class UI{
 		c.gridheight = 8;
 		c.gridwidth = 9;
 		//main_frame.add(new FillerBox(new Dimension(900,800), Color.blue),c);	//TODO:Fill in board
-		main_frame.add(new Board_JLayeredPane(board_dimension, Defines.BOARD_BACKGROUND_COLOR, board));
+		Board_JLayeredPane board_pane = new Board_JLayeredPane(board_dimension, Defines.BOARD_BACKGROUND_COLOR, board);
+		main_frame.add(board_pane, c);
 		
 		//statistics
 		c.gridx = 9;
@@ -69,6 +74,24 @@ public class UI{
 		c.gridheight = 2;
 		c.gridwidth = 9;
 		main_frame.add(new FillerBox(player_dimension, Color.magenta), c);	//TODO:Fill in player options
+
+		main_frame.addComponentListener(new ComponentListener(){
+
+			@Override
+			public void componentHidden(ComponentEvent arg0) {}
+
+			@Override
+			public void componentMoved(ComponentEvent arg0) {}
+
+			@Override
+			public void componentResized(ComponentEvent arg0) {
+				board_pane.resize_board(main_frame.getSize());
+			}
+
+			@Override
+			public void componentShown(ComponentEvent arg0) {}
+			
+		});
 		
 		/**** Display GUI ****/
 		main_frame.setVisible(true);

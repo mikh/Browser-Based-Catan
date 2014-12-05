@@ -161,4 +161,10 @@ public class Board_JLayeredPane extends JLayeredPane{
 			}
 		}
 	}
+	
+	public void resize_board(Dimension frame_size){
+		
+	}
+	
+	public Dimension 
 }
