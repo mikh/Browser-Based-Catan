@@ -18,7 +18,6 @@ public class TileRow extends JPanel{
 	Board_JLayeredPane parentPane = null;
 	ArrayList<gui_tile> g_tiles = new ArrayList<gui_tile>();
 
-	//TODO:mouse handler methods
 	public TileRow(Point start_location, Dimension size, ArrayList<Tile> tiles, Board_JLayeredPane parentPane){
 		this.setPreferredSize(size);
 		this.setMinimumSize(size);

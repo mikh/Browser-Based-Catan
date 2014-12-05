@@ -1,5 +1,6 @@
 package backend_ui;
 
+import game_controller.Board;
 import game_controller.Defines;
 import game_objects.Tile;
 
@@ -17,7 +18,7 @@ public class Board_JLayeredPane extends JLayeredPane{
 		
 	ArrayList<TileRow> rows = new ArrayList<TileRow>();
 	
-	public Board_JLayeredPane(Dimension size, Color background_color){
+	public Board_JLayeredPane(Dimension size, Color background_color, Board board){
 		super();
 		this.setPreferredSize(size);
 		this.setMinimumSize(size);
@@ -26,25 +27,95 @@ public class Board_JLayeredPane extends JLayeredPane{
 		this.setOpaque(false);
 		this.setBackground(background_color);
 		
-		populate();
+		populate(board);
 	}
 	
-	private void populate(){
+	private void populate(Board board){
+		ArrayList<ArrayList<Tile>> board_rows = new ArrayList<ArrayList<Tile>>();
+		
+		/**** parse board ****/
+		//TODO: parse board code
 		/* garbage */
 		ArrayList<Tile> row1 = new ArrayList<Tile>();
 		ArrayList<Tile> row2 = new ArrayList<Tile>();
+		ArrayList<Tile> row3 = new ArrayList<Tile>();
+		ArrayList<Tile> row4 = new ArrayList<Tile>();
+		ArrayList<Tile> row5 = new ArrayList<Tile>();
 		
+		row1.add(new Tile(Defines.WATER, 40, null));
+		row1.add(new Tile(Defines.WOOD, 4, null));
 		row1.add(new Tile(Defines.BRICK, 5, null));
 		row1.add(new Tile(Defines.WHEAT, 6, null));
 		row1.add(new Tile(Defines.WATER, 30, null));
+		board_rows.add(row1);
+		
+		row2.add(new Tile(Defines.WATER, 30, null));
+		row2.add(new Tile(Defines.SHEEP, 2, null));
 		row2.add(new Tile(Defines.DESERT, 4, null));
 		row2.add(new Tile(Defines.ORE, 4, null));
-		TileRow t_r_1 = new TileRow(new Point(20,100), new Dimension(600, 200), row1, this);
-		TileRow t_r_2 = new TileRow(new Point(20, 250), new Dimension(600,200), row2, this);
-		this.add(t_r_1, 0);
-		this.add(t_r_2, 1);
-		rows.add(t_r_1);
-		rows.add(t_r_2);
+		row2.add(new Tile(Defines.WATER, 40, null));
+		board_rows.add(row2);
+		
+		row3.add(new Tile(Defines.WATER, 30, null));
+		row3.add(new Tile(Defines.WHEAT, 2, null));
+		row3.add(new Tile(Defines.WHEAT, 4, null));
+		row3.add(new Tile(Defines.ORE, 4, null));
+		row3.add(new Tile(Defines.WATER, 40, null));
+		board_rows.add(row3);
+		
+		row4.add(new Tile(Defines.WATER, 30, null));
+		row4.add(new Tile(Defines.WOOD, 2, null));
+		row4.add(new Tile(Defines.BRICK, 4, null));
+		row4.add(new Tile(Defines.WHEAT, 4, null));
+		row4.add(new Tile(Defines.WATER, 40, null));
+		board_rows.add(row4);
+		
+		row5.add(new Tile(Defines.WATER, 30, null));
+		row5.add(new Tile(Defines.SHEEP, 2, null));
+		row5.add(new Tile(Defines.SHEEP, 4, null));
+		row5.add(new Tile(Defines.WOOD, 4, null));
+		row5.add(new Tile(Defines.WATER, 40, null));
+		board_rows.add(row5);
+		
+		/**** end parse board ****/
+		
+		//find limiting dimension
+		int max_x = 0, size_x = 0, size_y = 0;
+		int max_y = board_rows.size();
+		for(ArrayList<Tile> board_row : board_rows){
+			if(board_row.size() > max_x)
+				max_x = board_row.size();
+		}
+		int max_size_x = 0, max_size_y = 0;
+		max_size_y = (this.getSize().height-Defines.BOARD_PADDING.top_margin - Defines.BOARD_PADDING.bottom_margin)/max_y;
+		max_size_x = (int)((this.getSize().width - Defines.BOARD_PADDING.right_margin - Defines.BOARD_PADDING.left_margin)/(max_x+0.5));
+		int max_size_x_from_y = (int)(max_size_y*Math.sqrt(3)/2);
+		if(max_size_x_from_y > max_size_x){
+			//x is limiting
+			size_x = max_size_x;
+			size_y = (int)(max_size_x*2/Math.sqrt(3));
+		} else{
+			//y is limiting
+			size_x = max_size_x_from_y;
+			size_y = max_size_y;
+		}
+		
+		Point start_pos = new Point(Defines.BOARD_PADDING.right_margin + size_x/2, Defines.BOARD_PADDING.top_margin);
+		boolean offset = false;
+		
+		for(ArrayList<Tile> board_row : board_rows){
+			if(offset){
+				start_pos.x += size_x/2;
+				offset = false;
+			} else{
+				start_pos.x -= size_x/2;
+				offset = true;
+			}
+			TileRow t_r = new TileRow(start_pos, new Dimension(size_x*board_row.size(), size_y), board_row, this);
+			start_pos.y += (size_y*3/4);
+			this.add(t_r);
+			rows.add(t_r);
+		}
 	}
 	
 	public void propogate_mouse_event(Point mouse_location, TileRow t, int mouse_event_type, MouseEvent me){

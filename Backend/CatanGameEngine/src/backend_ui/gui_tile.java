@@ -3,13 +3,14 @@ package backend_ui;
 import game_controller.Defines;
 import game_objects.Tile;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -53,8 +54,9 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 	 public void paintComponent(Graphics g){
 		 try{
 			 super.paintComponent(g);
-			//TODO:add a filter that will allow resizing the images
-			 g.drawImage(ImageIO.read(new File(this.current_image)),0, 0, null);
+			 BufferedImage img = this.getScaledImage(ImageIO.read(new File(this.current_image)), size.width, size.height);
+			 System.out.println("Scaling image to " + size.width + " , " + size.height);
+			 g.drawImage(img, 0, 0, null);
 	 
 		 } catch(IOException e){
 			 System.out.println("There was an error reading the image!");
@@ -308,4 +310,18 @@ public class gui_tile extends JPanel implements MouseListener, MouseMotionListen
 		
 		return true;
 	}
+	
+	 private BufferedImage getScaledImage(BufferedImage image, int width, int height){
+		    int imageWidth  = image.getWidth();
+		    int imageHeight = image.getHeight();
+
+		    double scaleX = (double)width/imageWidth;
+		    double scaleY = (double)height/imageHeight;
+		    AffineTransform scaleTransform = AffineTransform.getScaleInstance(scaleX, scaleY);
+		    AffineTransformOp bilinearScaleOp = new AffineTransformOp(scaleTransform, AffineTransformOp.TYPE_BILINEAR);
+
+		    return bilinearScaleOp.filter(
+		        image,
+		        new BufferedImage(width, height, image.getType()));
+		}
 }

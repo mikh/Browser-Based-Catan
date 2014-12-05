@@ -2,8 +2,11 @@ package game_controller;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Rectangle;
 
 import javax.swing.JComponent;
+
+import backend_ui.Margin;
 
 public class Defines {
 	public static final int WHEAT = 0;
@@ -64,10 +67,12 @@ public class Defines {
 	public static final int BASE_TILE_HEIGHT = 200;
 	
 	public static final String JFRAME_NAME = "Browser Based Catan - Backend";
-	public static final Dimension JFRAME_INITIAL_SIZE = new Dimension(1200,1000);
+	public static final Dimension JFRAME_INITIAL_SIZE = new Dimension(600,600);
 	public static final JComponent JFRAME_RELATIVE_COMPONENT_POSITION = null;
 	
 	public static final Color BOARD_BACKGROUND_COLOR = new Color(0,0,0,0);
+	public static final Dimension BOARD_INITIAL_SIZE_PERCENTAGE = new Dimension((int)(10.0/12.0*100),(int)(10.0/11.0*100));
+	public static final Margin BOARD_PADDING = new Margin(20,20,20,20);	//padding top, right, bottom, left
 	
 	public static final int MOUSE_DRAGGED_EVENT = 0;
 	public static final int MOUSE_MOVED_EVENT = 1;
@@ -78,3 +83,5 @@ public class Defines {
 	public static final int MOUSE_RELEASED_EVENT = 6;
 	
 }
+
+
