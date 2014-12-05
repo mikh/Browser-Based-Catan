@@ -23,6 +23,10 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+//TODO: Next Steps:
+//TODO: Frame resizing
+//TODO: tile display 
+
 public class UI{
 	JFrame main_frame;
 	public UI(Board board){

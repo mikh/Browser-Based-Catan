@@ -41,41 +41,74 @@ public class Board_JLayeredPane extends JLayeredPane{
 		ArrayList<Tile> row3 = new ArrayList<Tile>();
 		ArrayList<Tile> row4 = new ArrayList<Tile>();
 		ArrayList<Tile> row5 = new ArrayList<Tile>();
+		ArrayList<Tile> row6 = new ArrayList<Tile>();
+		ArrayList<Tile> row7 = new ArrayList<Tile>();
 		
-		row1.add(new Tile(Defines.WATER, 40, null));
-		row1.add(new Tile(Defines.WOOD, 4, null));
-		row1.add(new Tile(Defines.BRICK, 5, null));
-		row1.add(new Tile(Defines.WHEAT, 6, null));
-		row1.add(new Tile(Defines.WATER, 30, null));
-		board_rows.add(row1);
+		row1.add(new Tile(Defines.WATER, 0, null));
+		row1.add(new Tile(Defines.WATER, 0, null));
+		row1.add(new Tile(Defines.WATER, 0, null));
+		row1.add(new Tile(Defines.WATER, 0, null));
+		row1.add(new Tile(Defines.WATER, 0, null));
+		row1.add(new Tile(Defines.WATER, 0, null));
+		row1.add(new Tile(Defines.WATER, 0, null));
 		
-		row2.add(new Tile(Defines.WATER, 30, null));
-		row2.add(new Tile(Defines.SHEEP, 2, null));
-		row2.add(new Tile(Defines.DESERT, 4, null));
-		row2.add(new Tile(Defines.ORE, 4, null));
-		row2.add(new Tile(Defines.WATER, 40, null));
-		board_rows.add(row2);
+		row2.add(new Tile(Defines.WATER, 0, null));
+		row2.add(new Tile(Defines.WATER, 0, null));
+		row2.add(new Tile(Defines.SHEEP, 6, null));
+		row2.add(new Tile(Defines.SHEEP, 3, null));
+		row2.add(new Tile(Defines.SHEEP, 8, null));
+		row2.add(new Tile(Defines.WATER, 0, null));
+		row2.add(new Tile(Defines.WATER, 0, null));
 		
-		row3.add(new Tile(Defines.WATER, 30, null));
-		row3.add(new Tile(Defines.WHEAT, 2, null));
-		row3.add(new Tile(Defines.WHEAT, 4, null));
+		row3.add(new Tile(Defines.WATER, 0, null));
+		row3.add(new Tile(Defines.WATER, 0, null));
+		row3.add(new Tile(Defines.WOOD, 2, null));
+		row3.add(new Tile(Defines.WOOD, 9, null));
 		row3.add(new Tile(Defines.ORE, 4, null));
-		row3.add(new Tile(Defines.WATER, 40, null));
+		row3.add(new Tile(Defines.DESERT, 10, null));
+		row3.add(new Tile(Defines.WATER, 0, null));
+		
+		row4.add(new Tile(Defines.WATER, 0, null));
+		row4.add(new Tile(Defines.ORE, 5, null));
+		row4.add(new Tile(Defines.ORE, 10, null));
+		row4.add(new Tile(Defines.SHEEP, 11, null));
+		row4.add(new Tile(Defines.WHEAT, 5, null));
+		row4.add(new Tile(Defines.WHEAT, 10, null));
+		row4.add(new Tile(Defines.WATER, 0, null));
+		
+		row5.add(new Tile(Defines.WATER, 0, null));
+		row5.add(new Tile(Defines.WATER, 0, null));
+		row5.add(new Tile(Defines.WHEAT, 8, null));
+		row5.add(new Tile(Defines.WHEAT, 3, null));
+		row5.add(new Tile(Defines.BRICK, 6, null));
+		row5.add(new Tile(Defines.BRICK, 9, null));
+		row5.add(new Tile(Defines.WATER, 0, null));
+		
+		row6.add(new Tile(Defines.WATER, 0, null));
+		row6.add(new Tile(Defines.WATER, 0, null));		
+		row6.add(new Tile(Defines.WOOD, 4, null));
+		row6.add(new Tile(Defines.BRICK, 11, null));
+		row6.add(new Tile(Defines.WOOD, 12, null));
+		row6.add(new Tile(Defines.WATER, 0, null));
+		row6.add(new Tile(Defines.WATER, 0, null));
+		
+		row7.add(new Tile(Defines.WATER, 0, null));
+		row7.add(new Tile(Defines.WATER, 0, null));
+		row7.add(new Tile(Defines.WATER, 0, null));
+		row7.add(new Tile(Defines.WATER, 0, null));
+		row7.add(new Tile(Defines.WATER, 0, null));
+		row7.add(new Tile(Defines.WATER, 0, null));
+		row7.add(new Tile(Defines.WATER, 0, null));
+		
+	
+		board_rows.add(row1);
+		board_rows.add(row2);
 		board_rows.add(row3);
-		
-		row4.add(new Tile(Defines.WATER, 30, null));
-		row4.add(new Tile(Defines.WOOD, 2, null));
-		row4.add(new Tile(Defines.BRICK, 4, null));
-		row4.add(new Tile(Defines.WHEAT, 4, null));
-		row4.add(new Tile(Defines.WATER, 40, null));
 		board_rows.add(row4);
-		
-		row5.add(new Tile(Defines.WATER, 30, null));
-		row5.add(new Tile(Defines.SHEEP, 2, null));
-		row5.add(new Tile(Defines.SHEEP, 4, null));
-		row5.add(new Tile(Defines.WOOD, 4, null));
-		row5.add(new Tile(Defines.WATER, 40, null));
 		board_rows.add(row5);
+		board_rows.add(row6);
+		board_rows.add(row7);
+		
 		
 		/**** end parse board ****/
 		
