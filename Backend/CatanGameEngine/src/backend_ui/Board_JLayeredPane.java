@@ -18,8 +18,9 @@ public class Board_JLayeredPane extends JLayeredPane{
 		
 	ArrayList<TileRow> rows = new ArrayList<TileRow>();
 	
-	public Board_JLayeredPane(Dimension size, Color background_color, Board board){
+	public Board_JLayeredPane(Dimension frame_size, Color background_color, Board board){
 		super();
+		Dimension size = compute_board_dimension(frame_size);
 		this.setPreferredSize(size);
 		this.setMinimumSize(size);
 		this.setSize(size);
@@ -163,8 +164,15 @@ public class Board_JLayeredPane extends JLayeredPane{
 	}
 	
 	public void resize_board(Dimension frame_size){
-		
+		Dimension new_board_size = compute_board_dimension(frame_size);
+		double change_x = (new_board_size.width*1.0)/(this.getSize().width*1.0);
+		double change_y = (new_board_size.height*1.0)/(this.getSize().height*1.0);
+		for(TileRow row : rows){
+			
+		}
 	}
 	
-	public Dimension 
+	public Dimension compute_board_dimension(Dimension frame_dimension){
+		 return new Dimension((int)((Defines.BOARD_INITIAL_SIZE_PERCENTAGE.width*1.0)/100.0*frame_dimension.width),(int)((Defines.BOARD_INITIAL_SIZE_PERCENTAGE.height*1.0)/100.0*frame_dimension.height));
+	}
 }

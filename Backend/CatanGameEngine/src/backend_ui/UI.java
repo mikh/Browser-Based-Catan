@@ -58,7 +58,7 @@ public class UI{
 		c.gridheight = 8;
 		c.gridwidth = 9;
 		//main_frame.add(new FillerBox(new Dimension(900,800), Color.blue),c);	//TODO:Fill in board
-		Board_JLayeredPane board_pane = new Board_JLayeredPane(board_dimension, Defines.BOARD_BACKGROUND_COLOR, board);
+		Board_JLayeredPane board_pane = new Board_JLayeredPane(main_frame.getSize(), Defines.BOARD_BACKGROUND_COLOR, board);
 		main_frame.add(board_pane, c);
 		
 		//statistics
