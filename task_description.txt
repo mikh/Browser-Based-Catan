@@ -21,3 +21,82 @@ In charge of game flow and controlling when players move, what is valid, when to
 
 3. AI
 
+
+
+Current Status: - 11/19/14
+[ ]Backend
+     [ ]control_structure          
+This is just the testing structure - it should eventually be changed to run the game as called by the front-end
+     [ ]game_controller
+[ ]Board
+Graph representation of board - used to determine tile locations - which are then used by structures to determine structure position
+[ ]Board graph data structure
+[ ]board generation
+[ ]board loading
+[ ]using board for structure positioning
+[ ]Controller
+Controller inits game conditions and loads the default parameters as passed by the front end. Also needs to initiate play
+[ ]Need to finish initializing everything for play
+[ ]Start game
+[ ]Defines
+List of global constants and variables
+[ ]DevelopmentCardDeck
+Controls Development card deck and allows players to draw cards
+[ ]INI_Parser
+Custom built INI file parser
+[ ]Maybe switch to widespread one?
+[ ]ParameterLoader
+Loads default parameters from file passed by front-end
+[ ]ResourceCache
+Handles resource management - controls # of cards going into and out of bank
+[ ]game_objects
+[ ]Buildable
+Base class for all objects that can be built by the player.Seems to be complete
+[ ]City
+Specific class for a city that inherits gathering structure. Defines the amount_to_gather, and the cost.Appears complete
+[ ]DevelopmentCard
+Extends Buildable. defines the cost of the development card.[ ]Need use effects
+[ ]GatheringStructure
+Extends Buildable. Abstract class that implements the gather method - allows resources to be acquired by structures for players.
+Appears Complete.
+[ ]Port
+Needs to provide port effects on map.
+[ ]Need to implement
+[ ]ResourceCard
+Class designed to act as the resource cards for players to use in their hands.
+Appears Complete.
+[ ]Road
+Extends Buildable. Specific road class.
+Implements the cost.
+May need more work.
+[ ]Robber
+Class to implement robber operations
+[ ]Need to implement
+[ ]Settlement
+Similar to city implements cost and amount_to_gather.
+Appears Complete.
+[ ]Tile
+Class that instantiates individual tiles used on board. Uses gather method to determine what resource cards to give players.
+[ ]players
+[ ]Player
+class that maintains player characteristics
+Implements storage for resources, Structures, and dev cards player controls
+Implements getResourceCount, and subtract and add resource.
+[ ]Additional player functions
+[ ]backend_ui
+[ ]UI
+backend GUI that can be used to test the game in the absence of front-end structure
+Currently this is mostly test code. Needs to be implemented into real output.
+[ ]Implement board display
+[ ]Implement Structure Display
+[ ]Integrate with control structure for gameplay 
+     
+
+[ ]Front End
+[ ]Need HTML front end page
+[ ]Need CSS Styling for HTML
+[ ]Need Dynamic language programming for game activities
+[ ]Need Code and graphics to display and interact with backend
+
+[ ]Integration
+Integrate code between front end and back end
